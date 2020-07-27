@@ -1,14 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {Provider} from 'react-redux';
+import geterateStore from './redux/store'
+import { createGlobalStyle } from 'styled-components'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    overflow: hidden;
+  }
+`
+
+let store = geterateStore();
+
+let WithStore = () => <Provider store={store}><GlobalStyle/><App/></Provider>
+
+ReactDOM.render(<WithStore />, document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
